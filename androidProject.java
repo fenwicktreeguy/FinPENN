@@ -41,6 +41,27 @@ void setup() {
     } else {
       println(db.getRecordCount( ("TABLE" + i) );
     }
+              
+     /*
+  for(char a = '1'; a <= '1000'; a++){
+    String res = "TABLE" + a;
+    String e = "CREATE TABLE (res) (" + "id INTEGER,"+ "product TEXT, price INTEGER)";
+    if(!db.tableExists("TABLE1")){
+      db.execute(e);
+    }
+  }
+  */
+  
+  /*
+  for(char i = '1'; i < '1000'; i++){
+    String res = "TABLE" + i;
+    if(!db.execute("INSERT into (res) ('product', 'price') " + " VALUES('whole_foods" + "','" + 96 + )" )) {
+      println("FAILURE");
+    } else {
+      println(db.getRecordCount( ("TABLE" + i) );
+    }
+    */
+    
  }
  
   
