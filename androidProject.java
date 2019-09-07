@@ -24,7 +24,7 @@ PImage img;
 
 void setup() {
   size(1600,1600);
-  img = loadImage("jeff.jpg");
+  //img = loadImage("jeff.jpg");
   
   for(char a = '1'; a <= '1000'; a++){
     String res = "TABLE" + a;
