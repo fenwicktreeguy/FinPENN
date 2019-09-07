@@ -29,6 +29,7 @@ void onCameraPreviewEvent()
   cam.read();
 }
 
+//mousePressed() function will be called when the screen is pressed(doesnt need to be directly called by programmer)
 void mousePressed()
 {
   if (cam.isStarted())
@@ -54,7 +55,7 @@ void defaultPage(){
   background(255,125,255);
   textSize(45);
   text("FinPENN: A Financial Hack!", 290,90);
-  text("PennApps XX", 330,150);
+  text("PennApps XX", 360,150);
   
   stroke(0);
   textSize(30);
@@ -95,6 +96,8 @@ void setup(){
   requestPermission("android.permission.WRITE_EXTERNAL_STORAGE", "checkPermission");
   String directory = new String(Environment.getExternalStorageDirectory().getAbsolutePath());
  
+  //trying to put sprinkles as a UI theme(since 20th birthday of PennApps)
+  //color is custom data type which takes three parameters: r, g, and b
   for(int i = 0; i < 10; i++){
     cords[i][0] = random(0,1940);
     cords[i][1] = random(0,1170);
