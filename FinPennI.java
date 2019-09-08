@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import processing.video.*;
 import ketai.camera.*;
-import android.os.Environment;
+import android.os.*;
 
-color[] sprinkleColors = new color[20];
-float[][] cords = new float[20][2];
+
+//ResponseHeaderOverrides override = new ResponseHeaderOverrides();override.setContentType( "image/jpeg" );
+
+//GeneratePresignedUrlRequest urlRequest =    new GeneratePresignedUrlRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME );// Added an hour's worth of milliseconds to the current time.urlRequest.setExpiration(    new Date( System.currentTimeMillis() + 3600000 ) );urlRequest.setResponseHeaders( override );
+
+color[] sprinkleColors = new color[70];
+float[][] cords = new float[70][2];
 
 
 
@@ -23,6 +28,7 @@ boolean topBox = false;
 boolean bottomBox = false;
 boolean backBox = false;
 
+String directory;
 
 void onCameraPreviewEvent()
 {
@@ -34,7 +40,8 @@ void mousePressed()
 {
   if (cam.isStarted())
   {
-    cam.savePhoto("b.png");
+    cam.setPhotoSize(1280,840);
+    cam.savePhoto();
     cam.stop();
   }
   else
@@ -93,35 +100,34 @@ void whichPress(){
 
 
 void setup(){
+  background(255);
   requestPermission("android.permission.WRITE_EXTERNAL_STORAGE", "checkPermission");
-  String directory = new String(Environment.getExternalStorageDirectory().getAbsolutePath());
+  directory = new String(Environment.getExternalStorageDirectory().getAbsolutePath());
  
   //trying to put sprinkles as a UI theme(since 20th birthday of PennApps)
   //color is custom data type which takes three parameters: r, g, and b
-  for(int i = 0; i < 10; i++){
-    cords[i][0] = random(0,1940);
-    cords[i][1] = random(0,1170);
+  for(int i = 0; i < 30; i++){
+    cords[i][0] = random(0,1600);
+    cords[i][1] = random(0,770);
     sprinkleColors[i] = color((int)(random(0,255)),(int)(random(0,255)),(int)(random(0,255)));
   }
-  for(int i = 0; i < 5; i++){
+  for(int i = 0; i < 20; i++){
     cords[10+i][0] = random(0,320);
-    cords[10+i][1] = random(0,1240);
+    cords[10+i][1] = random(0,1600);
     sprinkleColors[10+i] = color((int)random(0,255),(int)(random(0,255)),(int)(random(0,255)));
   }
-  for(int i = 0; i < 5; i++){
-    cords[15+i][0] = random(1170,1940);
-    cords[15+i][1] = random(0,1240);
+  for(int i = 0; i < 20; i++){
+    cords[15+i][0] = random(720,1600);
+    cords[15+i][1] = random(0,1600);
     sprinkleColors[15+i] = color((int)(random(0,255)),(int)(random(0,255)),(int)(random(0,255)) );
   }
-  //File file = new File(context.getFilesDir(), "receipt1.png");
-  size(1400,1940);
+  size(1940,2240);
   textSize(45);
   orientation(PORTRAIT);
   imageMode(CENTER);
   
-  cam = new KetaiCamera(this, 800, 800, 24);
+  cam = new KetaiCamera(this, 1800, 1100, 24);
   cam.setSaveDirectory(directory);
-  cam.setPhotoSize(1280,740);
   fill(255,125,255);
   
   fill(0);
@@ -132,12 +138,6 @@ void setup(){
 
 void draw(){
   background(255);
-  for(int i = 0; i < 20; i++){
-    color(sprinkleColors[i]);
-    ellipse(cords[i][0], cords[i][1], 20,20);
-    //println(cords[i][0] + " " + cords[i][1]);
-  }
-  
   defaultPage();
   whichPress();
   if(topBox){
@@ -146,6 +146,7 @@ void draw(){
     fill(255);
     text("GO TO DEFAULT SCREEN",360,1770);
     fill(0);
+    text("GO TO DEFAULT SCREEN",360,1770);
     fill(255,0,0);
     rect(320, 1670, 400, 400);
   
@@ -157,7 +158,15 @@ void draw(){
   } else if(backBox || (!topBox && !bottomBox) ){
     orientation(PORTRAIT);
     defaultPage();
+       for(int i = 0; i < 70; i++){
+    fill(sprinkleColors[i]);
+    ellipse(cords[i][0], cords[i][1], 10,10);
+    //println(cords[i][0] + " " + cords[i][1]);
   }
+  }
+  
+ 
+  
 }
 
 void checkPermission(boolean wasPermissionGranted){
