@@ -37,6 +37,9 @@ public class android extends PApplet {
 
 int[] sprinkleColors = new int[70];
 float[][] cords = new float[70][2];
+    
+    
+int[] defaultData = {5, 10, 22, 15
 
 int registeredReceipts = 0;
 
